@@ -1,11 +1,17 @@
 <?php
-  if(isset($_POST["full_name"], $_POST["email"], $_POST["password"])){
+  require_once 'phpfunctions.php';
+  if(isset($_POST["full_name"], $_POST["email"], $_POST["password"]) &&
+     is_string($_POST["full_name"]) &&
+     filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) &&
+     check_password_validity($_POST["password"])){
     // echo "Full Name: " . $_POST["full_name"] . "<br>";
     // echo "Email: " . $_POST["email"] . "<br>";
     // echo "Password: " . $_POST["password"] . "<br>";
-    $full_name = $_POST["full_name"];
-    $email =  $_POST["email"];
+    $full_name = filter_var(trim($_POST["full_name"]), FILTER_SANITIZE_STRING);
+    $email =  filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
     $password =  $_POST["password"];
+  }else{
+    echo "Something is wrong";
   }
 
 ?>
@@ -29,6 +35,22 @@
       <button type="submit" name="send_button" value="1">Send</button>
 
     </form>
+    <h2>So what is hash?</h2>
+    <ol>
+      <li>
+        It is a kind of encryption but totally different
+        <ul>
+          <li>Encryption is always reversible</li>
+          <li>Hash is always non reversible</li>
+        </ul>
+      </li>
+      <li>A small change in input string cause unpridictable changes in the hash</li>
+      <li>Hashing is deterministic</li>
+      <li>Hashing is fast and simple</li>
+      <li>Hashing must be slow</li>
+      <li>Hashing is not unique, that is for two different strings we may may get the same hash</li>
+      <li>But the probability of gettiing the same hashes for two known strings is extremely low </li>
+    </ol>
 
   </body>
 </html>
