@@ -95,7 +95,7 @@
     public function set_password($value)
     {
       if($this->_validate_password($value)){
-        $this->_attributes["password"] = password_hash($value, PASSWORD_DEFAULT);
+        $this->_attributes["password"] = password_hash(trim($value)."COVID19", PASSWORD_DEFAULT);
       }else{
         throw new Exception("Please give password according to our policy");
       }
