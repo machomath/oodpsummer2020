@@ -25,7 +25,7 @@
     <p>
       <?php
         if(isset($user_1)){
-          echo "id: " . $user_1->get_id() . "<br>";
+          echo "id: " . $user_1->get_id() . "<br>"; 
           echo "First Name: " . $user_1->get_first_name() . "<br>";
           echo "Last Name: " . $user_1->get_last_name() . "<br>";
           echo "Email: " . $user_1->get_email() . "<br>";
