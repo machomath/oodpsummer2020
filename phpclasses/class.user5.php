@@ -2,6 +2,7 @@
   /**
    *
    */
+  require_once 'confidencial.php';
   class User
   {
     protected $_attributes = [
@@ -94,8 +95,9 @@
 
     public function set_password($value)
     {
+      global $pepper;
       if($this->_validate_password($value)){
-        $this->_attributes["password"] = password_hash(trim($value)."COVID19", PASSWORD_DEFAULT);
+        $this->_attributes["password"] = password_hash(trim($value).$pepper, PASSWORD_DEFAULT);
       }else{
         throw new Exception("Please give password according to our policy");
       }
