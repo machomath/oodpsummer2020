@@ -2,8 +2,8 @@
   try {
     require_once 'class.user7.php';
     $user_1 = new User([
-      "id" => 20,
-      "first_name" => "Frank",
+      "id" => 1,
+      "first_name" => "<script>alert('you are hacked')</script>",
       "last_name" => "Lewis",
       "email" => "anyemail@g.com",
       "password" => "123456"

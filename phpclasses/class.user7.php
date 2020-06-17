@@ -17,18 +17,18 @@
     protected function _set_first_name($value)
     {
       try {
-        $this->_attributes["first_name"] = $this->_string_validity($value, 5);
+        $this->_attributes["first_name"] = $this->_string_validity($value, 256);
       } catch (Exception $e) {
-        throw new Exception($e->getMessage . ": First Name");
+        throw new Exception($e->getMessage() . ": First Name");
       }
     }
 
     protected function _set_last_name($value)
     {
       try {
-        $this->_attributes["last_name"] = $this->_string_validity($value, 5);
+        $this->_attributes["last_name"] = $this->_string_validity($value, 256);
       } catch (Exception $e) {
-        throw new Exception($e->getMessage . ": Last Name");
+        throw new Exception($e->getMessage() . ": Last Name");
       }
     }
 

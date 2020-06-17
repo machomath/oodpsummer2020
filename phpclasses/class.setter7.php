@@ -2,7 +2,8 @@
 /**
  *
  */
-abstract class Setter
+require_once 'class.dbobj7.php';
+abstract class Setter extends DBObj
 {
   function __construct($attributes)
   {
@@ -40,10 +41,19 @@ abstract class Setter
 
   protected function _set_id($value)
   {
-    if( $value >=0 && filter_var($value, FILTER_VALIDATE_INT)){
-        $this->_attributes["id"] = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+    try {
+      $this->_attributes["id"] = $this->_int_validity($value);
+    } catch (Exception $e) {
+      throw new Exception($e->getMessage() . "id");
+    }
+  }
+
+  protected function _int_validity($value)
+  {
+    if( $value >= 0 && ($value === 0 || filter_var($value, FILTER_VALIDATE_INT))){
+        return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
     }else{
-        throw new Exception("Id must be an integer");
+      throw new Exception("Invalid Integer: ");
     }
   }
 
