@@ -3,15 +3,16 @@
     require_once 'class.user7.php';
     $user_1 = new User([
       "id" => 1,
-      "first_name" => "<script>alert('you are hacked')</script>",
+      "first_name" => "Frank",
       "last_name" => "Lewis",
       "email" => "anyemail@g.com",
       "password" => "123456"
     ]);
+    $user_1->insert_into_db();
     // $user_1->id = 5;
     // $user_1->first_name = "Manthan";
     // $user_1->last_name = "Patel";
-    $user_1->email = "a1_sona@gm.com";
+    // $user_1->email = "a1_sona@gm.com";
     // $user_1->password = "  ";
     $user_1->username = "fl";
   } catch (Exception $e) {
