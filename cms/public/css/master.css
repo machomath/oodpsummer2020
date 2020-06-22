@@ -1,0 +1,13 @@
+nav{
+  background: pink;
+  display: flex;
+  height: 3vw;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+nav a{
+  text-decoration: none;
+  color: white;
+}

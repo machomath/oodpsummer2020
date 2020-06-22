@@ -3,9 +3,9 @@
     require_once 'class.user7.php';
     $user_1 = new User([
       "id" => 1,
-      "first_name" => "Frank",
-      "last_name" => "Lewis",
-      "email" => "anyemail@g.com",
+      "first_name" => "Bob",
+      "last_name" => "Milton",
+      "email" => "bm@gmail.com",
       "password" => "123456"
     ]);
     $user_1->insert_into_db();
