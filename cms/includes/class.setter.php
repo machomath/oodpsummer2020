@@ -2,7 +2,7 @@
 /**
  *
  */
-require_once 'class.dbobj7.php';
+// require_once 'class.dbobj.php';
 abstract class Setter extends DBObj
 {
   function __construct($attributes)

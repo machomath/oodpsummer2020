@@ -3,7 +3,7 @@
    *
    */
   require_once 'confidencial.php';
-  require_once 'class.setter7.php';
+  // require_once 'class.setter.php';
   class User extends Setter
   {
     protected $_attributes = [
