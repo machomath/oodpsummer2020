@@ -4,7 +4,7 @@
   <body>
     <?php require_once  __DIR__ . '/public/layouts/navbar.php'; ?>
     <h1>This page contains all info which is marked public by users</h1>
-    <p>SO everyone can come here without signing in </p>
+    <p>So everyone can come here without signing in </p>
 
   </body>
 </html>

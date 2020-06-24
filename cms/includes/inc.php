@@ -3,6 +3,6 @@
   require_once 'class.dbobj.php';
   require_once 'class.setter.php';
   require_once 'class.user.php';
-
+  require_once 'confidencial.php';
 
 ?>

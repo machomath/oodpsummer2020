@@ -13,6 +13,20 @@ abstract class DBObj
   {
   }
 
+  public function find_in_db($column)
+  {
+    global $db;
+    $sql = "SELECT * FROM " . $this->_table . " WHERE " . $column . "=?;";
+    $values = [$this->_attributes[$column]];
+    try {
+      $statement = $db->prepare($sql);
+      $statement->execute($values);
+      return $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function insert_into_db()
   {
     global $db;
