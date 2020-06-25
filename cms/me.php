@@ -34,7 +34,10 @@
            ]);
            $result = $user->find_in_db("email");
            if(!empty($result) && password_verify($_POST["password"].$pepper, $result[0]["password"])){
-             echo "Login procedure will come here";
+             ////////////////////
+             $my_session->signin($result[0]); //$result[0] refers to the user found in db
+             header("Location: mywall.php");
+             ////////////////////
            }else{
               $_SESSION["alert_message"] = "The account info does not match.";
            }
@@ -43,10 +46,15 @@
          }
     }
   ?>
+  <?php
+    if(isset($_POST["signout"])){
+      $my_session->signout();
+    }
+  ?>
   <body>
     <?php require_once  __DIR__ . '/public/layouts/navbar.php'; ?>
 
-    <?php if (1) { ?>
+    <?php if (!$my_session->is_signed_in()) { ?>
       <h2>Signup</h2>
       <form method="post">
         <input type="text" name="first_name" placeholder="Frist Name" required>
@@ -64,7 +72,7 @@
     <?php } else { ?>
       <h2>Signout</h2>
       <form method="post">
-        <button type="submit" name="signin">Signin</button>
+        <button type="submit" name="signout">Signout</button>
       </form>
     <?php } ?>
     <?php
