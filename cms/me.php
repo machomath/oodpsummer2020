@@ -69,6 +69,13 @@
         <input type="password" name="password" placeholder="Password" required>
         <button type="submit" name="signin">Signin</button>
       </form>
+      <h2>Forgot Password</h2>
+      <form method="post">
+        <input id="forgot-email" type="email" name="email" placeholder="Email" required>
+        <input type="text" name="pin" placeholder="Please get the PIN" required>
+        <button type="submit" name="signin">Get Password</button>
+      </form>
+
     <?php } else { ?>
       <h2>Signout</h2>
       <form method="post">
@@ -85,5 +92,6 @@
         unset($_SESSION["alert_message"]);
       }
      ?>
+     <script type="text/javascript" src="./public/js/ajax-func.js"></script>
   </body>
 </html>
