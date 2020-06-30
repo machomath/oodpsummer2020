@@ -4,7 +4,9 @@
   <?php
     if(isset($_POST["signup"], $_POST["first_name"], $_POST["last_name"], $_POST["email"], $_POST["password"])
        && is_string($_POST["first_name"]) && is_string($_POST["last_name"])
-       && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+       && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)
+       && !$my_session->is_signed_in()
+     ){
       try {
         $user = new User([
           "id" => 0,
@@ -23,7 +25,8 @@
   ?>
   <?php
     if(isset($_POST["signin"], $_POST["email"], $_POST["password"]) &&
-       filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+       filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) &&
+        !$my_session->is_signed_in()){
          try {
            $user = new User([
              "id" => 0,
@@ -46,8 +49,37 @@
          }
     }
   ?>
+
   <?php
-    if(isset($_POST["signout"])){
+    if(isset($_POST["forgot_password"], $_POST["email"], $_POST["pin"], $_POST["password"]) &&
+       filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) &&
+       !$my_session->is_signed_in() &&
+       $_POST["pin"] == $_SESSION["pin"] &&
+       $_SESSION["pin_exp"] >= time() &&
+       $_SESSION["email"] === $_POST["email"]
+        ){
+         unset($_SESSION["pin_exp"], $_SESSION["pin"], $_SESSION["email"]);
+         try {
+           $user = new User([
+             "id" => 0,
+             "first_name" => "nfn",
+             "last_name" => "nln",
+             "email" => $_POST["email"],
+             "password" => $_POST["password"]
+           ]);
+           if($user->update_in_db("password", "email")){
+             $_SESSION["alert_message"] = "Your password is updated";
+           } else{
+             $_SESSION["alert_message"] = "Please try again";
+           }
+         } catch (Exception $e) {
+           $_SESSION["alert_message"] = $e->getMessage();
+         }
+    }
+  ?>
+
+  <?php
+    if(isset($_POST["signout"]) && $my_session->is_signed_in()){
       $my_session->signout();
     }
   ?>
@@ -73,9 +105,9 @@
       <form method="post">
         <input id="forgot-email" type="email" name="email" placeholder="Email" required>
         <input type="text" name="pin" placeholder="Please get the PIN" required>
-        <button type="submit" name="signin">Get Password</button>
+        <input type="password" name="password" placeholder="New Password" required>
+        <button type="submit" name="forgot_password">Get Password</button>
       </form>
-
     <?php } else { ?>
       <h2>Signout</h2>
       <form method="post">

@@ -13,6 +13,21 @@ abstract class DBObj
   {
   }
 
+  public function update_in_db($column, $where_col)
+  {
+    global $db;
+    $sql = "UPDATE " . $this->_table . " SET " . $column . "=?";
+    $sql .= " WHERE " . $where_col . "=?;";
+    $values = [$this->_attributes[$column], $this->_attributes[$where_col]];
+    try {
+      $statement = $db->prepare($sql);
+      $statement->execute($values);
+      return $statement->rowCount();
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function find_in_db($column)
   {
     global $db;

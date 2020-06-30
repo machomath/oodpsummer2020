@@ -17,6 +17,7 @@
          if(!empty($result)){
            $pin = $_SESSION["pin"] = rand(100000, 999999);
            $_SESSION["pin_exp"] = time() + 15*60;
+           $_SESSION["email"] = $result[0]["email"];
            $to = $result[0]["email"];
            $to_name = $result[0]["first_name"];
            $subject = "PIN for your reset password " . $pin ;
