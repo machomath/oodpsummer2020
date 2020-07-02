@@ -8,6 +8,7 @@
         $name = $_SESSION["user_attributes"]["first_name"];
       ?>
       <h2>Welcome <?php echo $name;  ?> </h2>
+      <p>Good luck to you all</p>
     <?php } ?>
 
   </body>
